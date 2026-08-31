@@ -1,11 +1,11 @@
 FROM debian:bookworm-slim AS build
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    build-essential libcups2-dev cups cups-filters && \
+    build-essential libcups2-dev cups cups-filters cups-ipp-utils libpappl-dev && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /src
 COPY . /src
-RUN make clean test && ./debian/build-deb.sh && \
+RUN make clean test printer-app airprint-test && ./debian/build-deb.sh && \
     dpkg-deb --info build/tsc-da200-cups_*_*.deb && \
     dpkg-deb --contents build/tsc-da200-cups_*_*.deb && \
     dpkg -i build/tsc-da200-cups_*_*.deb && \
