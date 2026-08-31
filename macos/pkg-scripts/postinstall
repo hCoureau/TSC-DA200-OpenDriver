@@ -1,0 +1,46 @@
+#!/bin/sh
+set -u
+
+ppd_source=/Library/Printers/PPDs/Contents/Resources/TSC-DA200-Open.ppd
+fixed_ppd_source=/Library/Printers/PPDs/Contents/Resources/TSC-DA200-Open-4x6.ppd
+ppd_dir=/private/etc/cups/ppd
+
+# CUPS stores a private copy of a queue's PPD. Refresh only queues that were
+# already using this open driver, preserving their URI and saved options.
+if [ -r "$ppd_source" ] && [ -d "$ppd_dir" ]; then
+  for queue_ppd in "$ppd_dir"/*.ppd; do
+    [ -f "$queue_ppd" ] || continue
+    /usr/bin/grep -q 'Open TSPL' "$queue_ppd" || continue
+    queue_ppd_source=$ppd_source
+    if /usr/bin/grep -q 'fixed 4 x 6 in' "$queue_ppd" && [ -r "$fixed_ppd_source" ]; then
+      queue_ppd_source=$fixed_ppd_source
+    fi
+    queue=${queue_ppd##*/}
+    queue=${queue%.ppd}
+    saved_file=$(/usr/bin/mktemp "/private/tmp/tsc-da200-options.XXXXXX") || continue
+    /usr/bin/lpoptions -p "$queue" -l 2>/dev/null |
+      /usr/bin/awk '
+        /^[A-Za-z0-9_.-]+\// {
+          split($1, names, "/")
+          for (i = 2; i <= NF; i++)
+            if (substr($i, 1, 1) == "*") {
+              print names[1] "=" substr($i, 2)
+              break
+            }
+        }
+      ' > "$saved_file"
+    if ! /usr/sbin/lpadmin -p "$queue" -P "$queue_ppd_source" 2>/dev/null; then
+      /bin/rm -f "$saved_file"
+      continue
+    fi
+    while IFS= read -r option; do
+      [ -n "$option" ] || continue
+      /usr/sbin/lpadmin -p "$queue" -o "$option" 2>/dev/null || true
+    done < "$saved_file"
+    /bin/rm -f "$saved_file"
+    /usr/sbin/cupsenable "$queue" 2>/dev/null || true
+  done
+fi
+
+/usr/bin/killall -HUP cupsd 2>/dev/null || true
+exit 0

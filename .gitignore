@@ -1,0 +1,13 @@
+/build/
+/build-sanitize/
+/dist/
+/.release-work/
+*.dSYM/
+.DS_Store
+._*
+*.p8
+*.p12
+*.mobileprovision
+AuthKey_*.p8
+.env
+.env.*

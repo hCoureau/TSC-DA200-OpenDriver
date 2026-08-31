@@ -1,0 +1,19 @@
+FROM fedora:42 AS build
+
+RUN dnf -y -q install cups-devel cups-filters gcc make rpm-build && \
+    dnf clean all
+WORKDIR /src
+COPY . /src
+RUN chmod +x rpm/build-rpm.sh && \
+    make clean test check-release && \
+    rpm/build-rpm.sh && \
+    rpm_file=$(find build/rpm/top/RPMS -type f -name 'tsc-da200-cups-[0-9]*.rpm' -print -quit) && \
+    rpm -qpi "$rpm_file" && \
+    rpm -qpl "$rpm_file" && \
+    rpm -i "$rpm_file" && \
+    test -x /usr/lib/cups/filter/rastertotspl && \
+    test -x /usr/bin/tsc-da200-setup && \
+    cupstestppd -W all /usr/share/ppd/tsc/TSC-DA200.ppd
+
+FROM scratch AS artifact
+COPY --from=build /src/build/rpm/top/RPMS/ /

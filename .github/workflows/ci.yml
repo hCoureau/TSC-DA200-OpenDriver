@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux-native:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential libcups2-dev cups-client cups-filters
+      - name: Validate source and tests
+        run: |
+          make clean test check-release
+          sh -n scripts/*.sh tools/*.sh macos/*.sh macos/pkg-scripts/* debian/*.sh rpm/*.sh
+          cupstestppd -W all ppd/TSC-DA200.ppd
+          cupstestppd -W all ppd/TSC-DA200-4x6.ppd
+
+  debian-packages:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux/amd64
+            artifact: amd64
+          - platform: linux/arm64
+            artifact: arm64
+          - platform: linux/arm/v7
+            artifact: armhf
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
+      - name: Build, install, and test Debian package
+        run: |
+          mkdir -p "build/ci-${{ matrix.artifact }}"
+          docker buildx build \
+            --platform "${{ matrix.platform }}" \
+            --file debian/Dockerfile.test \
+            --output "type=local,dest=build/ci-${{ matrix.artifact }}" .
+          test -f build/ci-${{ matrix.artifact }}/tsc-da200-cups_*.deb
+
+  macos-package:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Build, test, and audit universal package
+        run: |
+          make clean test check-release
+          sh -n scripts/*.sh tools/*.sh macos/*.sh macos/pkg-scripts/* debian/*.sh rpm/*.sh
+          macos/build-pkg.sh
+          macos/audit-pkg.sh
+
+  macos-future-sdk-compatibility:
+    # Build against the newest public hosted macOS image. A macOS 27 runtime
+    # and printer test remains a release gate once that image/testbed exists.
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Record active macOS SDK
+        run: xcrun --sdk macosx --show-sdk-version
+      - name: Build, test, and audit with the newest public toolchain
+        run: |
+          make clean test check-release
+          sh -n scripts/*.sh tools/*.sh macos/*.sh macos/pkg-scripts/* debian/*.sh rpm/*.sh
+          macos/build-pkg.sh
+          macos/audit-pkg.sh
+
+  fedora-rpm:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
+      - name: Build, install, and test Fedora RPM
+        run: |
+          mkdir -p build/fedora-rpm
+          docker buildx build \
+            --platform linux/amd64 \
+            --file rpm/Dockerfile.test \
+            --output type=local,dest=build/fedora-rpm .
+          test -n "$(find build/fedora-rpm -type f -name '*.rpm' -print -quit)"
