@@ -46,7 +46,7 @@ internet. Use a trusted LAN/VPN for remote printing.
 ## Quick start on Raspberry Pi
 
 ```sh
-sudo apt install ./tsc-da200-cups_1.1.0_arm64.deb
+sudo apt install ./tsc-da200-cups_1.1.1_arm64.deb
 lpinfo -v | grep '^usb://'
 sudo tsc-da200-setup --share-lan 'usb://...'
 ```

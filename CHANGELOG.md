@@ -1,9 +1,11 @@
 # Changelog
 
-## 1.1.0 - release candidate
+## 1.1.1 - release candidate 2
 
 - Adds a fixed-4x6 PAPPL AirPrint Printer Application for Raspberry Pi.
 - Fixes invalid zero-valued IPP orientation and resolution defaults.
+- RC2 corrects the DA200 physical feed direction and uses deterministic
+  threshold rendering for barcode- and logo-safe AirPrint output.
 
 ## 1.0.0 - 2026-08-29
 

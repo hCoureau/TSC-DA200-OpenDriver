@@ -6,6 +6,12 @@ port=${DA200_AIRPRINT_TEST_PORT:-18000}
 spool=$(mktemp -d)
 log=$(mktemp)
 
+# These are physical output invariants for the fixed-4x6 service. The IPP
+# test below validates the client-visible contract; this guards the TSPL
+# mapping that only a connected printer can render.
+grep -Fq 'DIRECTION 1,0' "$project_dir/src/tsc_da200_printer_app.c"
+grep -Fq 'TSPL_DITHER_THRESHOLD' "$project_dir/src/tsc_da200_printer_app.c"
+
 cleanup() {
   if [ -n "${server_pid:-}" ]; then
     kill "$server_pid" 2>/dev/null || true
