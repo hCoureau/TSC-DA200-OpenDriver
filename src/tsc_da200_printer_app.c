@@ -214,7 +214,9 @@ static bool da200_start_page(pappl_job_t *job, pappl_pr_options_t *options,
   density = (options->darkness_configured + options->print_darkness) * 15 / 100;
   if (density < 0) density = 0;
   if (density > 15) density = 15;
-  if (papplDevicePrintf(device, "SIZE 101.6 mm,152.4 mm\nGAP 3 mm,0 mm\nDIRECTION 0,0\nDENSITY %d\nCLS\nBITMAP 0,0,%u,%u,1,",
+  /* Direction 1 makes the logical top of a portrait AirPrint document exit
+   * the DA200 first.  This is the device's normal physical feed direction. */
+  if (papplDevicePrintf(device, "SIZE 101.6 mm,152.4 mm\nGAP 3 mm,0 mm\nDIRECTION 1,0\nDENSITY %d\nCLS\nBITMAP 0,0,%u,%u,1,",
                         density, state->output_bytes, options->header.cupsHeight) < 0) {
     papplJobSetMessage(job, "Unable to initialize the DA200 print job.");
     return false;
@@ -228,7 +230,10 @@ static bool da200_write_line(pappl_job_t *job, pappl_pr_options_t *options,
   da200_job_t *state = papplJobGetData(job);
   (void)options;
   if (!state || !state->row || !line) return false;
-  tspl_pack_gray_row(state->row, line, state->width, y, TSPL_DITHER_ORDERED, 1, 0);
+  /* IPP clients commonly supply anti-aliased grayscale pixels even for
+   * barcodes.  A fixed threshold preserves their rectangular 1-bit geometry;
+   * ordered dithering turns those edge pixels into a visible dot pattern. */
+  tspl_pack_gray_row(state->row, line, state->width, y, TSPL_DITHER_THRESHOLD, 1, 0);
   tspl_prepare_bitmap_row(state->row, state->width, 0);
   if (!da200_write(device, state->row, state->output_bytes)) {
     papplJobSetMessage(job, "Unable to send raster data to the DA200.");
@@ -289,7 +294,7 @@ static void da200_identify(pappl_printer_t *printer,
 }
 
 int main(int argc, char *argv[]) {
-  return papplMainloop(argc, argv, "1.1.0", NULL,
+  return papplMainloop(argc, argv, "1.1.1", NULL,
                         (int)(sizeof(da200_drivers) / sizeof(da200_drivers[0])),
                         da200_drivers, NULL, da200_driver,
                         NULL, NULL, da200_system, NULL, NULL);

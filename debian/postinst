@@ -4,6 +4,7 @@ set -e
 if command -v systemctl >/dev/null 2>&1; then
   install -d -o lp -g lp -m 0750 /var/spool/tsc-da200-printer-app
   systemctl daemon-reload >/dev/null 2>&1 || true
+  systemctl try-restart tsc-da200-printer-app.service >/dev/null 2>&1 || true
   systemctl try-restart cups.service >/dev/null 2>&1 || true
 elif command -v service >/dev/null 2>&1; then
   service cups restart >/dev/null 2>&1 || true
