@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 - release candidate
+
+- Adds a fixed-4x6 PAPPL AirPrint Printer Application for Raspberry Pi.
+- Fixes invalid zero-valued IPP orientation and resolution defaults.
+
 ## 1.0.0 - 2026-08-29
 
 - Native universal Apple Silicon and Intel macOS package.

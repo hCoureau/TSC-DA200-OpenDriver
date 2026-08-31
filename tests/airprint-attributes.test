@@ -1,0 +1,18 @@
+{
+  NAME "DA200 AirPrint capability response"
+  OPERATION Get-Printer-Attributes
+  GROUP operation
+  ATTR charset attributes-charset utf-8
+  ATTR language attributes-natural-language en
+  ATTR uri printer-uri $uri
+  ATTR keyword requested-attributes document-format-supported,media-col-database,media-col-default,printer-make-and-model,printer-resolution-default,orientation-requested-default,print-color-mode-supported,urf-supported
+  STATUS successful-ok
+  EXPECT document-format-supported OF-TYPE mimeMediaType
+  EXPECT media-col-database OF-TYPE collection
+  EXPECT media-col-default OF-TYPE collection
+  EXPECT printer-make-and-model OF-TYPE textWithoutLanguage
+  EXPECT printer-resolution-default OF-TYPE resolution
+  EXPECT orientation-requested-default OF-TYPE enum
+  EXPECT print-color-mode-supported OF-TYPE keyword
+  EXPECT urf-supported OF-TYPE keyword
+}

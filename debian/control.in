@@ -1,0 +1,10 @@
+Package: tsc-da200-cups
+Version: @VERSION@
+Section: text
+Priority: optional
+Architecture: @ARCHITECTURE@
+Depends: cups, cups-filters, libpappl1, avahi-daemon, systemd
+Maintainer: TSC DA200 Open Driver Project
+Description: Open CUPS and AirPrint driver for the 203 dpi TSC DA200
+ Converts CUPS raster jobs to native TSPL and includes a fixed 4x6 AirPrint
+ Printer Application for Raspberry Pi and Debian-based print servers.

@@ -3,20 +3,31 @@ CFLAGS ?= -O2 -Wall -Wextra -Werror
 CPPFLAGS ?=
 CUPS_CFLAGS := $(shell cups-config --cflags 2>/dev/null)
 CUPS_LIBS := $(shell cups-config --libs 2>/dev/null || echo -lcups)
+PAPPL_CFLAGS := $(shell pkg-config --cflags pappl 2>/dev/null)
+PAPPL_LIBS := $(shell pkg-config --libs pappl 2>/dev/null)
 SERVERBIN := $(shell cups-config --serverbin 2>/dev/null || echo /usr/lib/cups)
 PPDDIR ?= /usr/share/ppd/tsc
 TOOLDIR ?= /usr/local/bin
 DESTDIR ?=
 
-.PHONY: all clean install test check-release audit-macos-pkg
+.PHONY: all clean install test printer-app airprint-test check-release audit-macos-pkg
 
 all: build/rastertotspl
+
+printer-app: build/tsc-da200-printer-app
+
+airprint-test: build/tsc-da200-printer-app
+	./tests/test-airprint.sh
 
 build:
 	mkdir -p build
 
 build/rastertotspl: src/rastertotspl.c src/tspl.c src/tspl.h | build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CUPS_CFLAGS) -Isrc -o $@ src/rastertotspl.c src/tspl.c $(CUPS_LIBS)
+
+build/tsc-da200-printer-app: src/tsc_da200_printer_app.c src/tspl.c src/tspl.h | build
+	@test -n "$(PAPPL_LIBS)" || { echo "PAPPL development files are required (install libpappl-dev)." >&2; exit 1; }
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(PAPPL_CFLAGS) -Isrc -o $@ src/tsc_da200_printer_app.c src/tspl.c $(PAPPL_LIBS)
 
 build/test_tspl: tests/test_tspl.c src/tspl.c src/tspl.h | build
 	$(CC) $(CPPFLAGS) $(CFLAGS) -D_GNU_SOURCE -Isrc -o $@ tests/test_tspl.c src/tspl.c
