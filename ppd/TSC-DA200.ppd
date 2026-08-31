@@ -1,6 +1,6 @@
 *PPD-Adobe: "4.3"
 *FormatVersion: "4.3"
-*FileVersion: "1.0.0"
+*FileVersion: "1.1.0"
 *LanguageVersion: English
 *LanguageEncoding: ISOLatin1
 *PCFileName: "TSCDA200.PPD"
@@ -8,7 +8,7 @@
 *Product: "(DA200)"
 *ModelName: "TSC DA200"
 *ShortNickName: "TSC DA200 (Open TSPL)"
-*NickName: "TSC DA200 203dpi (Open TSPL 1.0.0)"
+*NickName: "TSC DA200 203dpi (Open TSPL 1.1.0)"
 *PSVersion: "(3010.000) 550"
 *LanguageLevel: "3"
 *ColorDevice: False

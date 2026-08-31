@@ -16,8 +16,8 @@ and TCP port 9100 connections.
   ID-signed, notarized installer.
 - Raspberry Pi OS / Debian packages for ARM64 and ARMHF.
 - Fedora RPM packages for x86_64 and AArch64.
-- USB and LAN printer connections; an optional Raspberry Pi IPP share for
-  trusted local networks.
+- USB and LAN printer connections; a fixed-4x6 Raspberry Pi AirPrint service
+  for trusted local networks.
 - Gap, black-mark, and continuous media; speed, density, offsets, direction,
   tear/peel; threshold and ordered halftone; mirror, negative, copies, and
   CUPS collation.
@@ -46,13 +46,22 @@ internet. Use a trusted LAN/VPN for remote printing.
 ## Quick start on Raspberry Pi
 
 ```sh
-sudo apt install ./tsc-da200-cups_1.0.0_arm64.deb
+sudo apt install ./tsc-da200-cups_1.1.0_arm64.deb
 lpinfo -v | grep '^usb://'
 sudo tsc-da200-setup --share-lan 'usb://...'
 ```
 
 The discovery URI is specific to the host and printer. Copy it exactly from
 `lpinfo -v`; do not guess a URI from a product name.
+
+For a fixed 4 × 6 AirPrint queue, use the separate Printer Application:
+
+```sh
+sudo tsc-da200-airprint-setup 'usb://...'
+```
+
+See the [AirPrint Pi guide](docs/AIRPRINT.md) for the iOS acceptance test and
+the one-queue safety model.
 
 ## Build from source
 

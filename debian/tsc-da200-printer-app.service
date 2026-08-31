@@ -1,0 +1,21 @@
+[Unit]
+Description=TSC DA200 fixed-4x6 AirPrint Printer Application
+After=network-online.target avahi-daemon.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=lp
+Group=lp
+Environment=XDG_CONFIG_HOME=/var/spool/tsc-da200-printer-app
+ExecStart=/usr/sbin/tsc-da200-printer-app server
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/spool/tsc-da200-printer-app
+
+[Install]
+WantedBy=multi-user.target
