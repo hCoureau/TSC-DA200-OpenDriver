@@ -258,7 +258,7 @@ void tspl_pack_gray_row(unsigned char *output, const unsigned char *input,
     /* The ordered thresholds are centered within their four-level buckets,
        giving exact white no dots and exact black complete coverage. */
     if ((dither == TSPL_DITHER_ORDERED && blackness > threshold) ||
-        (dither == TSPL_DITHER_THRESHOLD && blackness > threshold))
+        (dither == TSPL_DITHER_THRESHOLD && blackness >= threshold))
       output[x / 8U] |= (unsigned char)(0x80U >> (x & 7U));
   }
 }

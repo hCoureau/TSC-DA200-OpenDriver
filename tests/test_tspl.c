@@ -22,6 +22,7 @@ int main(void) {
   unsigned char gray_w[] = {255, 128, 127, 0};
   unsigned char packed[1];
   unsigned char halftone_white[] = {0, 0, 0, 0};
+  unsigned char barcode_edge[] = {0, 0, 127, 128, 255, 255, 0, 0};
   unsigned char ordered_input[8];
   unsigned char ordered_output[1];
   unsigned previous_dots = 0;
@@ -98,9 +99,15 @@ int main(void) {
   tspl_prepare_bitmap_row(bitmap_padded, 10, 0);
   assert(bitmap_padded[0] == 0x00 && bitmap_padded[1] == 0x3f);
   tspl_pack_gray_row(packed, gray_k, 4, 0, TSPL_DITHER_THRESHOLD, 0, 0);
-  assert(packed[0] == 0x10);
+  assert(packed[0] == 0x30);
   tspl_pack_gray_row(packed, gray_w, 4, 0, TSPL_DITHER_THRESHOLD, 1, 0);
-  assert(packed[0] == 0x10);
+  assert(packed[0] == 0x30);
+  /* Barcode-safe thresholding must make the same binary choice on every
+     row; ordered dithering would instead vary these anti-aliased edges. */
+  tspl_pack_gray_row(packed, barcode_edge, 8, 0, TSPL_DITHER_THRESHOLD, 1, 0);
+  assert(packed[0] == 0xe3);
+  tspl_pack_gray_row(ordered_output, barcode_edge, 8, 7, TSPL_DITHER_THRESHOLD, 1, 0);
+  assert(ordered_output[0] == packed[0]);
   tspl_pack_gray_row(packed, halftone_white, 4, 0, TSPL_DITHER_ORDERED, 0, 0);
   assert(packed[0] == 0x00);
   {
