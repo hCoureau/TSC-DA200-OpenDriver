@@ -34,7 +34,7 @@ For a network-connected printer, use port 9100 only on a trusted LAN:
 sudo /Library/Printers/TSC/OpenDA200/setup-printer.sh 'socket://PRINTER_IP:9100'
 ```
 
-## Raspberry Pi OS / Debian
+## Raspberry Pi OS / Debian (signed APT repository)
 
 Confirm the architecture before choosing a package:
 
@@ -42,14 +42,31 @@ Confirm the architecture before choosing a package:
 dpkg --print-architecture
 ```
 
-Install `tsc-da200-cups_1.0.0_arm64.deb` on 64-bit Raspberry Pi OS/Debian, or
-`tsc-da200-cups_1.0.0_armhf.deb` on 32-bit Raspberry Pi OS/Debian:
+Add the project's signed APT repository, then install the package. The
+repository supports `arm64`, `armhf`, and `amd64`; `apt update` followed by
+your normal upgrade command will install future driver releases automatically.
+The signing key is scoped to this repository with `signed-by`, rather than
+being trusted globally:
 
 ```sh
 sudo apt update
-sudo apt install cups cups-filters
-sudo apt install ./tsc-da200-cups_1.0.0_arm64.deb
+sudo apt install -y curl gnupg
+curl -fsSL https://hcoureau.github.io/TSC-DA200-OpenDriver/apt/public.gpg | \
+  sudo gpg --dearmor -o /usr/share/keyrings/tsc-da200-open-driver.gpg
+echo 'deb [signed-by=/usr/share/keyrings/tsc-da200-open-driver.gpg] https://hcoureau.github.io/TSC-DA200-OpenDriver/apt stable main' | \
+  sudo tee /etc/apt/sources.list.d/tsc-da200-open-driver.list >/dev/null
+sudo apt update
+sudo apt install tsc-da200-cups
 ```
+
+Upgrade just this package with `sudo apt update && sudo apt install --only-upgrade
+tsc-da200-cups`, or upgrade all configured system packages with your usual
+`sudo apt upgrade`. To inspect the available version, use `apt policy
+tsc-da200-cups`.
+
+For an offline installation, download the architecture-matched `.deb` and
+`SHA256SUMS` from the GitHub release, verify the checksum, then run `sudo apt
+install ./tsc-da200-cups_VERSION_ARCH.deb`.
 
 For a USB printer, discover its exact URI and create the queue:
 

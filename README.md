@@ -35,7 +35,7 @@ Choose the matching path in the [installation guide](docs/INSTALLATION.md):
 | Platform | Recommended path |
 | --- | --- |
 | Apple Silicon or Intel macOS | Download the notarized `.pkg` from the GitHub release |
-| Raspberry Pi OS / Debian | Install the matching `.deb` (`arm64` or `armhf`) |
+| Raspberry Pi OS / Debian | Add the signed APT repository, then install `tsc-da200-cups` |
 | Fedora | Install the matching `.rpm` (`x86_64` or `aarch64`) |
 | Other CUPS 2.x Linux | Build from source |
 | Windows | Print through a Raspberry Pi IPP share; direct Windows USB is not implemented |
@@ -46,7 +46,14 @@ internet. Use a trusted LAN/VPN for remote printing.
 ## Quick start on Raspberry Pi
 
 ```sh
-sudo apt install ./tsc-da200-cups_1.1.1_arm64.deb
+sudo apt update
+sudo apt install -y curl gnupg
+curl -fsSL https://hcoureau.github.io/TSC-DA200-OpenDriver/apt/public.gpg | \
+  sudo gpg --dearmor -o /usr/share/keyrings/tsc-da200-open-driver.gpg
+echo 'deb [signed-by=/usr/share/keyrings/tsc-da200-open-driver.gpg] https://hcoureau.github.io/TSC-DA200-OpenDriver/apt stable main' | \
+  sudo tee /etc/apt/sources.list.d/tsc-da200-open-driver.list >/dev/null
+sudo apt update
+sudo apt install tsc-da200-cups
 lpinfo -v | grep '^usb://'
 sudo tsc-da200-setup --share-lan 'usb://...'
 ```
