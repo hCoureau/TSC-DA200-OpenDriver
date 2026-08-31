@@ -1,0 +1,28 @@
+name: Bug report
+description: Report a reproducible driver or packaging problem without sensitive data.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include printer serial numbers, full USB/network URIs, customer label contents, or unredacted diagnostics. Use a private security advisory for security issues.
+  - type: input
+    id: version
+    attributes:
+      label: Driver version
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [macOS, Raspberry Pi OS / Debian ARM64, Raspberry Pi OS / Debian ARMHF, Debian AMD64, Fedora, Other Linux, Windows via IPP]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Safe reproduction steps and observed result
+    validations:
+      required: true

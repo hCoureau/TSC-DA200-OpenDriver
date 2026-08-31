@@ -1,0 +1,291 @@
+*PPD-Adobe: "4.3"
+*FormatVersion: "4.3"
+*FileVersion: "1.0.0"
+*LanguageVersion: English
+*LanguageEncoding: ISOLatin1
+*PCFileName: "TSCDA200.PPD"
+*Manufacturer: "TSC"
+*Product: "(DA200)"
+*ModelName: "TSC DA200"
+*ShortNickName: "TSC DA200 (Open TSPL)"
+*NickName: "TSC DA200 203dpi (Open TSPL 1.0.0)"
+*PSVersion: "(3010.000) 550"
+*LanguageLevel: "3"
+*ColorDevice: False
+*DefaultColorSpace: Gray
+*FileSystem: False
+*Throughput: "6"
+*LandscapeOrientation: Plus90
+*cupsVersion: 2.2
+*cupsManualCopies: True
+*cupsFilter: "application/vnd.cups-raster 0 rastertotspl"
+*cupsFilter2: "application/vnd.cups-raster application/vnd.tsc-tspl 0 rastertotspl"
+*cupsModelNumber: 200
+
+*MaxMediaWidth: "306.14"
+*MaxMediaHeight: "6480.00"
+*HWMargins: 0 0 0 0
+*CustomPageSize True: "pop pop pop <</PageSize[5 -2 roll]/ImagingBBox null>>setpagedevice"
+*ParamCustomPageSize Width: 1 points 54 306.14
+*ParamCustomPageSize Height: 2 points 28.35 6480
+*ParamCustomPageSize WidthOffset: 3 points 0 0
+*ParamCustomPageSize HeightOffset: 4 points 0 0
+*ParamCustomPageSize Orientation: 5 int 0 0
+
+*OpenGroup: General/General
+*OpenUI *PageSize/Label Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: 4x6.Fullbleed
+*PageSize 1x2Rotated.Fullbleed/2 x 1 in: "<</PageSize[144 72]/ImagingBBox null>>setpagedevice"
+*PageSize 2x4.Fullbleed/2 x 4 in: "<</PageSize[144 288]/ImagingBBox null>>setpagedevice"
+*PageSize 4x4.Fullbleed/4 x 4 in: "<</PageSize[288 288]/ImagingBBox null>>setpagedevice"
+*PageSize 4x6.Fullbleed/4 x 6 in: "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+*PageSize 100x150mm.Fullbleed/100 x 150 mm: "<</PageSize[283.46 425.20]/ImagingBBox null>>setpagedevice"
+*PageSize 102x152mm.Fullbleed/102 x 152 mm: "<</PageSize[289.13 430.87]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageSize
+*OpenUI *PageRegion/Label Size: PickOne
+*OrderDependency: 10 AnySetup *PageRegion
+*DefaultPageRegion: 4x6.Fullbleed
+*PageRegion 1x2Rotated.Fullbleed/2 x 1 in: "<</PageSize[144 72]/ImagingBBox null>>setpagedevice"
+*PageRegion 2x4.Fullbleed/2 x 4 in: "<</PageSize[144 288]/ImagingBBox null>>setpagedevice"
+*PageRegion 4x4.Fullbleed/4 x 4 in: "<</PageSize[288 288]/ImagingBBox null>>setpagedevice"
+*PageRegion 4x6.Fullbleed/4 x 6 in: "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+*PageRegion 100x150mm.Fullbleed/100 x 150 mm: "<</PageSize[283.46 425.20]/ImagingBBox null>>setpagedevice"
+*PageRegion 102x152mm.Fullbleed/102 x 152 mm: "<</PageSize[289.13 430.87]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageRegion
+*ImageableArea 1x2Rotated.Fullbleed: "0 0 144 72"
+*ImageableArea 2x4.Fullbleed: "0 0 144 288"
+*ImageableArea 4x4.Fullbleed: "0 0 288 288"
+*ImageableArea 4x6.Fullbleed: "0 0 288 432"
+*ImageableArea 100x150mm.Fullbleed: "0 0 283.46 425.20"
+*ImageableArea 102x152mm.Fullbleed: "0 0 289.13 430.87"
+*DefaultImageableArea: 4x6.Fullbleed
+*PaperDimension 1x2Rotated.Fullbleed: "144 72"
+*PaperDimension 2x4.Fullbleed: "144 288"
+*PaperDimension 4x4.Fullbleed: "288 288"
+*PaperDimension 4x6.Fullbleed: "288 432"
+*PaperDimension 100x150mm.Fullbleed: "283.46 425.20"
+*PaperDimension 102x152mm.Fullbleed: "289.13 430.87"
+*DefaultPaperDimension: 4x6.Fullbleed
+
+*OpenUI *Collate/Collate copies: Boolean
+*OrderDependency: 15 AnySetup *Collate
+*DefaultCollate: True
+*Collate True/Yes: ""
+*Collate False/No: ""
+*CloseUI: *Collate
+*CloseGroup: General
+
+*OpenGroup: Quality/Print Quality
+*OpenUI *Resolution/Resolution: PickOne
+*OrderDependency: 20 AnySetup *Resolution
+*DefaultResolution: 203dpi
+*Resolution 203dpi/203 DPI: "<</HWResolution[203 203]/cupsBitsPerColor 1/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*CloseUI: *Resolution
+
+*OpenUI *ColorOption/Image processing: PickOne
+*OrderDependency: 21 AnySetup *ColorOption
+*DefaultColorOption: Monochrome
+*ColorOption Monochrome/Monochrome (sharp text and barcodes): "<</HWResolution[203 203]/cupsBitsPerColor 1/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*ColorOption GrayScale/Threshold grayscale: "<</HWResolution[203 203]/cupsBitsPerColor 8/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*ColorOption Halftone/Ordered halftone (photos): "<</HWResolution[203 203]/cupsBitsPerColor 8/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*CloseUI: *ColorOption
+
+*OpenUI *TscSpeed/Print speed: PickOne
+*OrderDependency: 22 AnySetup *TscSpeed
+*DefaultTscSpeed: 4
+*TscSpeed 2/2 inches/second: ""
+*TscSpeed 3/3 inches/second: ""
+*TscSpeed 4/4 inches/second: ""
+*TscSpeed 5/5 inches/second: ""
+*TscSpeed 6/6 inches/second: ""
+*CloseUI: *TscSpeed
+
+*OpenUI *TscDensity/Density: PickOne
+*OrderDependency: 23 AnySetup *TscDensity
+*DefaultTscDensity: 7
+*TscDensity 0/0 (lightest): ""
+*TscDensity 1/1: ""
+*TscDensity 2/2: ""
+*TscDensity 3/3: ""
+*TscDensity 4/4: ""
+*TscDensity 5/5: ""
+*TscDensity 6/6: ""
+*TscDensity 7/7: ""
+*TscDensity 8/8: ""
+*TscDensity 9/9: ""
+*TscDensity 10/10: ""
+*TscDensity 11/11: ""
+*TscDensity 12/12: ""
+*TscDensity 13/13: ""
+*TscDensity 14/14: ""
+*TscDensity 15/15 (darkest): ""
+*CloseUI: *TscDensity
+*CloseGroup: Quality
+
+*OpenGroup: Media/Media and Sensors
+*OpenUI *TscMediaType/Media sensing: PickOne
+*OrderDependency: 30 AnySetup *TscMediaType
+*DefaultTscMediaType: Gap
+*TscMediaType Gap/Labels with gaps: ""
+*TscMediaType BlackMark/Black mark: ""
+*TscMediaType Continuous/Continuous media: ""
+*CloseUI: *TscMediaType
+
+*OpenUI *TscGap/Gap or mark height: PickOne
+*OrderDependency: 31 AnySetup *TscGap
+*DefaultTscGap: 3
+*TscGap 0/0 mm: ""
+*TscGap 1/1 mm: ""
+*TscGap 2/2 mm: ""
+*TscGap 3/3 mm (0.12 in): ""
+*TscGap 4/4 mm: ""
+*TscGap 5/5 mm: ""
+*TscGap 6/6 mm: ""
+*TscGap 8/8 mm: ""
+*TscGap 10/10 mm: ""
+*TscGap 15/15 mm: ""
+*TscGap 20/20 mm: ""
+*CloseUI: *TscGap
+
+*OpenUI *TscOffset/Extra gap or mark feed: PickOne
+*OrderDependency: 32 AnySetup *TscOffset
+*DefaultTscOffset: 0
+*TscOffset 0/0 mm: ""
+*TscOffset 1/1 mm: ""
+*TscOffset 2/2 mm: ""
+*TscOffset 3/3 mm: ""
+*TscOffset 4/4 mm: ""
+*TscOffset 5/5 mm: ""
+*TscOffset 6/6 mm: ""
+*TscOffset 8/8 mm: ""
+*TscOffset 10/10 mm: ""
+*TscOffset 12/12 mm: ""
+*TscOffset 15/15 mm: ""
+*CloseUI: *TscOffset
+*CloseGroup: Media
+
+*OpenGroup: Position/Positioning
+*OpenUI *TscReferenceX/Reference X: PickOne
+*OrderDependency: 40 AnySetup *TscReferenceX
+*DefaultTscReferenceX: 0
+*TscReferenceX 0/0 mm: ""
+*TscReferenceX 1/1 mm: ""
+*TscReferenceX 2/2 mm: ""
+*TscReferenceX 3/3 mm: ""
+*TscReferenceX 5/5 mm: ""
+*TscReferenceX 10/10 mm: ""
+*TscReferenceX 15/15 mm: ""
+*CloseUI: *TscReferenceX
+
+*OpenUI *TscReferenceY/Reference Y: PickOne
+*OrderDependency: 41 AnySetup *TscReferenceY
+*DefaultTscReferenceY: 0
+*TscReferenceY 0/0 mm: ""
+*TscReferenceY 1/1 mm: ""
+*TscReferenceY 2/2 mm: ""
+*TscReferenceY 3/3 mm: ""
+*TscReferenceY 5/5 mm: ""
+*TscReferenceY 10/10 mm: ""
+*TscReferenceY 15/15 mm: ""
+*CloseUI: *TscReferenceY
+
+*OpenUI *TscShiftX/Horizontal image shift: PickOne
+*OrderDependency: 42 AnySetup *TscShiftX
+*DefaultTscShiftX: 0
+*TscShiftX -25.4/-25.4 mm: ""
+*TscShiftX -20/-20 mm: ""
+*TscShiftX -15/-15 mm: ""
+*TscShiftX -10/-10 mm: ""
+*TscShiftX -5/-5 mm: ""
+*TscShiftX -3/-3 mm: ""
+*TscShiftX -2/-2 mm: ""
+*TscShiftX -1/-1 mm: ""
+*TscShiftX 0/0 mm: ""
+*TscShiftX 1/1 mm: ""
+*TscShiftX 2/2 mm: ""
+*TscShiftX 3/3 mm: ""
+*TscShiftX 5/5 mm: ""
+*TscShiftX 10/10 mm: ""
+*TscShiftX 15/15 mm: ""
+*TscShiftX 20/20 mm: ""
+*TscShiftX 25.4/25.4 mm: ""
+*CloseUI: *TscShiftX
+
+*OpenUI *TscShiftY/Vertical image shift: PickOne
+*OrderDependency: 43 AnySetup *TscShiftY
+*DefaultTscShiftY: 0
+*TscShiftY -25.4/-25.4 mm: ""
+*TscShiftY -20/-20 mm: ""
+*TscShiftY -15/-15 mm: ""
+*TscShiftY -10/-10 mm: ""
+*TscShiftY -5/-5 mm: ""
+*TscShiftY -3/-3 mm: ""
+*TscShiftY -2/-2 mm: ""
+*TscShiftY -1/-1 mm: ""
+*TscShiftY 0/0 mm: ""
+*TscShiftY 1/1 mm: ""
+*TscShiftY 2/2 mm: ""
+*TscShiftY 3/3 mm: ""
+*TscShiftY 5/5 mm: ""
+*TscShiftY 10/10 mm: ""
+*TscShiftY 15/15 mm: ""
+*TscShiftY 20/20 mm: ""
+*TscShiftY 25.4/25.4 mm: ""
+*CloseUI: *TscShiftY
+
+*OpenUI *TscFeedOffset/Tear, peel, or cutter stop offset: PickOne
+*OrderDependency: 44 AnySetup *TscFeedOffset
+*DefaultTscFeedOffset: 0
+*TscFeedOffset -25.4/-25.4 mm: ""
+*TscFeedOffset -20/-20 mm: ""
+*TscFeedOffset -15/-15 mm: ""
+*TscFeedOffset -10/-10 mm: ""
+*TscFeedOffset -5/-5 mm: ""
+*TscFeedOffset -3/-3 mm: ""
+*TscFeedOffset -2/-2 mm: ""
+*TscFeedOffset -1/-1 mm: ""
+*TscFeedOffset 0/0 mm: ""
+*TscFeedOffset 1/1 mm: ""
+*TscFeedOffset 2/2 mm: ""
+*TscFeedOffset 3/3 mm: ""
+*TscFeedOffset 5/5 mm: ""
+*TscFeedOffset 10/10 mm: ""
+*TscFeedOffset 15/15 mm: ""
+*TscFeedOffset 20/20 mm: ""
+*TscFeedOffset 25.4/25.4 mm: ""
+*CloseUI: *TscFeedOffset
+
+*OpenUI *TscDirection/Print orientation: PickOne
+*OrderDependency: 45 AnySetup *TscDirection
+*DefaultTscDirection: 1
+*TscDirection 1/Normal: ""
+*TscDirection 0/Rotate 180 degrees: ""
+*CloseUI: *TscDirection
+*CloseGroup: Position
+
+*OpenGroup: PostPrint/Post Print
+*OpenUI *TscPostAction/Post-print action: PickOne
+*OrderDependency: 50 AnySetup *TscPostAction
+*DefaultTscPostAction: Tear
+*TscPostAction None/None: ""
+*TscPostAction Tear/Tear off: ""
+*TscPostAction Peel/Peel off (requires peeler): ""
+*CloseUI: *TscPostAction
+*CloseGroup: PostPrint
+
+*OpenGroup: Effects/Effects
+*OpenUI *TscMirror/Mirror image: Boolean
+*OrderDependency: 60 AnySetup *TscMirror
+*DefaultTscMirror: False
+*TscMirror True/Yes: ""
+*TscMirror False/No: ""
+*CloseUI: *TscMirror
+
+*OpenUI *TscNegative/Negative image: Boolean
+*OrderDependency: 61 AnySetup *TscNegative
+*DefaultTscNegative: False
+*TscNegative True/Yes: ""
+*TscNegative False/No: ""
+*CloseUI: *TscNegative
+*CloseGroup: Effects

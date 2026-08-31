@@ -1,0 +1,48 @@
+Name:           tsc-da200-cups
+Version:        @VERSION@
+Release:        1%{?dist}
+Summary:        Open CUPS raster driver for the 203 dpi TSC DA200
+
+License:        MIT
+Source0:        %{name}-%{version}.tar.gz
+
+BuildRequires:  gcc
+BuildRequires:  make
+BuildRequires:  cups-devel
+Requires:       cups
+Requires:       cups-filters
+
+%description
+An independent open CUPS raster filter that converts one-bit CUPS raster jobs
+to native TSPL BITMAP jobs for the 203 dpi TSC DA200. It includes queue setup,
+media calibration, and privacy-safe diagnostic utilities.
+
+%prep
+%autosetup
+
+%build
+%make_build
+
+%install
+%make_install SERVERBIN=%{_prefix}/lib/cups PPDDIR=%{_datadir}/ppd/tsc TOOLDIR=%{_bindir}
+
+%check
+%make_build test
+cupstestppd -W all ppd/TSC-DA200.ppd
+cupstestppd -W all ppd/TSC-DA200-4x6.ppd
+
+%files
+%license LICENSE
+%doc README.md CHANGELOG.md CONTRIBUTING.md SECURITY.md THIRD_PARTY_NOTICES.md
+%doc RELEASE-@VERSION@.md docs/FEATURES.md docs/FIRMWARE.md
+%doc docs/FUTURE-PROOFING.md docs/HARDWARE-TEST.md docs/SUPPORT.md
+%{_prefix}/lib/cups/filter/rastertotspl
+%{_datadir}/ppd/tsc/TSC-DA200.ppd
+%{_datadir}/ppd/tsc/TSC-DA200-4x6.ppd
+%{_bindir}/tsc-da200-calibrate
+%{_bindir}/tsc-da200-diagnose
+%{_bindir}/tsc-da200-setup
+
+%changelog
+* Sat Aug 29 2026 TSC DA200 Open Driver contributors - @VERSION@-1
+- Initial independent open-source release

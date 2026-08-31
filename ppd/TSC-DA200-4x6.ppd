@@ -1,0 +1,105 @@
+*PPD-Adobe: "4.3"
+*FormatVersion: "4.3"
+*FileVersion: "1.0.0"
+*LanguageVersion: English
+*LanguageEncoding: ISOLatin1
+*PCFileName: "TSCDA24X.PPD"
+*Manufacturer: "TSC"
+*Product: "(DA200)"
+*ModelName: "TSC DA200"
+*ShortNickName: "TSC DA200 (Open TSPL 4x6)"
+*NickName: "TSC DA200 203dpi (Open TSPL 1.0.0, fixed 4 x 6 in)"
+*PSVersion: "(3010.000) 550"
+*LanguageLevel: "3"
+*ColorDevice: False
+*DefaultColorSpace: Gray
+*FileSystem: False
+*Throughput: "6"
+*LandscapeOrientation: Plus90
+*cupsVersion: 2.2
+*cupsManualCopies: True
+*cupsFilter: "application/vnd.cups-raster 0 rastertotspl"
+*cupsFilter2: "application/vnd.cups-raster application/vnd.tsc-tspl 0 rastertotspl"
+*cupsModelNumber: 200
+*MaxMediaWidth: "288"
+*MaxMediaHeight: "432"
+*HWMargins: 0 0 0 0
+
+*OpenGroup: General/General
+*OpenUI *PageSize/Label Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: 4x6.Fullbleed
+*PageSize 4x6.Fullbleed/4 x 6 in: "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageSize
+*OpenUI *PageRegion/Label Size: PickOne
+*OrderDependency: 10 AnySetup *PageRegion
+*DefaultPageRegion: 4x6.Fullbleed
+*PageRegion 4x6.Fullbleed/4 x 6 in: "<</PageSize[288 432]/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageRegion
+*ImageableArea 4x6.Fullbleed: "0 0 288 432"
+*DefaultImageableArea: 4x6.Fullbleed
+*PaperDimension 4x6.Fullbleed: "288 432"
+*DefaultPaperDimension: 4x6.Fullbleed
+*OpenUI *Collate/Collate copies: Boolean
+*OrderDependency: 15 AnySetup *Collate
+*DefaultCollate: True
+*Collate True/Yes: ""
+*Collate False/No: ""
+*CloseUI: *Collate
+*CloseGroup: General
+
+*OpenGroup: Quality/Print Quality
+*OpenUI *Resolution/Resolution: PickOne
+*OrderDependency: 20 AnySetup *Resolution
+*DefaultResolution: 203dpi
+*Resolution 203dpi/203 DPI: "<</HWResolution[203 203]/cupsBitsPerColor 1/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*CloseUI: *Resolution
+*OpenUI *ColorOption/Image processing: PickOne
+*OrderDependency: 21 AnySetup *ColorOption
+*DefaultColorOption: Monochrome
+*ColorOption Monochrome/Monochrome (sharp text and barcodes): "<</HWResolution[203 203]/cupsBitsPerColor 1/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*ColorOption GrayScale/Threshold grayscale: "<</HWResolution[203 203]/cupsBitsPerColor 8/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*ColorOption Halftone/Ordered halftone (photos): "<</HWResolution[203 203]/cupsBitsPerColor 8/cupsColorOrder 0/cupsColorSpace 3/cupsCompression 0>>setpagedevice"
+*CloseUI: *ColorOption
+*CloseGroup: Quality
+
+*OpenGroup: Media/Media and Sensors
+*OpenUI *TscMediaType/Media sensing: PickOne
+*OrderDependency: 30 AnySetup *TscMediaType
+*DefaultTscMediaType: Gap
+*TscMediaType Gap/Labels with gaps: ""
+*TscMediaType BlackMark/Black mark: ""
+*TscMediaType Continuous/Continuous media: ""
+*CloseUI: *TscMediaType
+*OpenUI *TscGap/Gap or mark height: PickOne
+*OrderDependency: 31 AnySetup *TscGap
+*DefaultTscGap: 3
+*TscGap 0/0 mm: ""
+*TscGap 1/1 mm: ""
+*TscGap 2/2 mm: ""
+*TscGap 3/3 mm (0.12 in): ""
+*TscGap 4/4 mm: ""
+*TscGap 5/5 mm: ""
+*CloseUI: *TscGap
+*CloseGroup: Media
+
+*OpenGroup: Position/Positioning
+*OpenUI *TscDirection/Label direction: PickOne
+*OrderDependency: 40 AnySetup *TscDirection
+*DefaultTscDirection: Normal
+*TscDirection Normal/Normal: ""
+*TscDirection Rotate180/Rotate 180 degrees: ""
+*CloseUI: *TscDirection
+*OpenUI *TscMirror/Mirror image: Boolean
+*OrderDependency: 41 AnySetup *TscMirror
+*DefaultTscMirror: False
+*TscMirror True/On: ""
+*TscMirror False/Off: ""
+*CloseUI: *TscMirror
+*OpenUI *TscNegative/Negative image: Boolean
+*OrderDependency: 42 AnySetup *TscNegative
+*DefaultTscNegative: False
+*TscNegative True/On: ""
+*TscNegative False/Off: ""
+*CloseUI: *TscNegative
+*CloseGroup: Position

@@ -1,0 +1,10 @@
+/build export-ignore
+/build-sanitize export-ignore
+/dist export-ignore
+/.release-work export-ignore
+.DS_Store export-ignore
+._* export-ignore
+*.p8 export-ignore
+*.p12 export-ignore
+*.mobileprovision export-ignore
+AuthKey_*.p8 export-ignore
