@@ -1,6 +1,6 @@
 # Raspberry Pi AirPrint (fixed 4 × 6)
 
-The `v1.1.1-rc.2` pre-release includes a PAPPL IPP Everywhere printer application. It is a
+The stable release includes a PAPPL IPP Everywhere printer application. It is a
 separate AirPrint endpoint, not a shared legacy CUPS/PPD queue. The endpoint
 advertises only thermal monochrome 4 × 6 inch labels at 203 dpi, deliberately
 preventing clients from selecting incompatible paper sizes.
@@ -32,7 +32,7 @@ systemctl status tsc-da200-printer-app.service avahi-daemon
 Do not also share the legacy CUPS DA200 queue over AirPrint; advertise only the
 new queue to avoid clients choosing the incompatible endpoint.
 
-## RC acceptance test
+## Acceptance test
 
 1. From iOS, choose **TSC DA200 4x6** in the system print sheet.
 2. Print a normal document/PDF with one page and confirm it prints upright,

@@ -58,3 +58,18 @@ Download every public release asset into a clean directory, verify its checksum,
 and rerun the package-specific install/audit checks. Confirm the release page
 does not disclose credentials, exact printer identifiers, customer content, or
 local filesystem paths.
+
+## Signed APT repository
+
+Stable GitHub releases automatically publish the corresponding Debian packages
+to the GitHub Pages APT repository. The workflow rebuilds the released source
+for `amd64`, `arm64`, and `armhf`, generates signed `InRelease` metadata, and
+deploys only the public package index, packages, and public signing key.
+
+The private signing key is stored only as the `APT_GPG_PRIVATE_KEY` GitHub
+Actions secret. It must be a dedicated signing-only OpenPGP key with no
+passphrase, no other credentials, and no copy in this repository. The public
+key is deliberately published at `apt/public.gpg`; verify its fingerprint
+through the repository's release process before rotating the key. A release is
+not complete until a clean Debian or Raspberry Pi host can add the repository,
+run `apt update`, validate its signature, and install the new package.
